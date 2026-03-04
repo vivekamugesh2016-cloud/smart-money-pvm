@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Money Quiz - Smart ₹Money</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body class="bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen">
+
+  <!-- NAV same -->
+
+  <div class="pt-28 max-w-4xl mx-auto px-6 py-12">
+    <h1 class="text-5xl font-bold text-center mb-6">Smart Money Quiz</h1>
+    <p class="text-center text-xl mb-12">Test your money skills! 10 questions – aim for 10/10!</p>
+
+    <div id="quiz" class="space-y-12">
+      <!-- Questions generated in JS -->
+    </div>
+
+    <div class="text-center mt-12">
+      <button onclick="submitQuiz()" class="bg-emerald-600 text-white px-12 py-6 rounded-3xl text-2xl font-bold hover:bg-emerald-700">Submit Quiz</button>
+    </div>
+
+    <div id="result" class="text-center mt-12 text-4xl font-bold hidden"></div>
+  </div>
+
+  <script>
+    // dark toggle same
+
+    const questions = [
+      { q: "What is 'Needs' in spending?", a: ["Things you must have like food & school things", "Fun things like games", "Saving money", "All of above"], correct: 0 },
+      { q: "How much should you save from pocket money as per 50/30/20?", a: ["50%", "30%", "20%", "100%"], correct: 2 },
+      { q: "Saving ₹10 every day for 1 year gives you?", a: ["₹3650", "₹1000", "₹365", "₹10000"], correct: 0 },
+      { q: "'Pay yourself first' means?", a: ["Save before spending", "Spend all then save", "Borrow money", "Buy wants first"], correct: 0 },
+      { q: "Pocket money ₹500. Needs ₹250, Wants ₹?", a: ["₹150", "₹250", "₹100", "₹0"], correct: 0 }, // 50/30/20 → 30% wants =150
+      { q: "Impulse buying is?", a: ["Buying without thinking", "Saving money", "Planning budget", "Giving to charity"], correct: 0 },
+      { q: "Best place to keep savings safe?", a: ["Bank account or piggy bank", "Under pillow", "Spend it fast", "Lend to friends"], correct: 0 },
+      { q: "Compound interest helps savings?", a: ["Grow faster over time", "Decrease money", "Stay same", "None"], correct: 0 },
+      { q: "₹100 saved monthly at 7% interest after 5 years ≈?", a: ["More than ₹7000", "Exactly ₹6000", "Less than ₹6000", "Zero"], correct: 0 },
+      { q: "Main goal of Smart Money?", a: ["Be money-smart & build future", "Spend everything", "Borrow a lot", "Ignore money"], correct: 0 }
+    ]
+
+    function loadQuiz() {
+      const quizDiv = document.getElementById('quiz')
+      quizDiv.innerHTML = questions.map((q,i) => `
+        <div class="bg-white dark:bg-zinc-800 rounded-3xl p-8 shadow-xl">
+          <h3 class="text-2xl font-bold mb-6">${i+1}. ${q.q}</h3>
+          ${q.a.map((opt,j) => `
+            <label class="block mb-3">
+              <input type="radio" name="q${i}" value="${j}" class="mr-3">
+              ${opt}
+            </label>
+          `).join('')}
+        </div>
+      `).join('')
+    }
+
+    function submitQuiz() {
+      let score = 0
+      questions.forEach((q,i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`)
+        if (selected && parseInt(selected.value) === q.correct) score++
+      })
+      const result = document.getElementById('result')
+      result.innerHTML = `You scored ${score}/10! ${score >= 8 ? 'Super Money Master! 🎉' : score >= 5 ? 'Good job! Keep learning!' : 'Try again! You can do better!'}`
+      result.classList.remove('hidden')
+      if (score >= 9) {
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } })
+      }
+    }
+
+    loadQuiz()
+  </script>
+</body>
+</html>
