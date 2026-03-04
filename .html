@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Inspire - Smart Money PVM</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" href="logo.png" type="image/png">
+  <style>
+    .story-card { transition: all 0.4s; }
+    .story-card:hover { transform: translateY(-12px); box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); }
+    .nav-btn { transition: all 0.3s; }
+    .nav-btn:hover { transform: scale(1.08); background-color: #10b981; color: white; }
+    .nav-btn.active { background-color: #10b981; color: white; }
+    html { scroll-behavior: smooth; }
+    .story-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid #10b981; }
+    .img-fallback { width: 100px; height: 100px; border-radius: 50%; border: 4px solid #10b981; background: #10b981; color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+  </style>
+</head>
+<body class="bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen pb-20">
+
+  <!-- Top App Nav -->
+  <nav class="bg-white dark:bg-zinc-900 shadow-lg fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+      <img src="logo.png" alt="Smart Money" class="h-10 w-auto">
+      <div class="hidden md:flex gap-8 text-lg font-medium text-zinc-500 dark:text-zinc-400">
+        <a href="index.html">Home</a>
+        <a href="savings.html">Savings</a>
+        <a href="spending.html">Spending</a>
+        <a href="planner.html">Planner</a>
+        <a href="inspire.html" class="text-emerald-600 font-bold">Inspire</a>
+      </div>
+      <div class="flex items-center gap-5">
+        <button onclick="toggleDark()" id="theme-btn" class="text-3xl text-zinc-500"><i class="fas fa-moon"></i></button>
+        <div id="user-info" class="font-medium text-emerald-600 text-lg">student</div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="pt-28 max-w-6xl mx-auto px-6 py-12">
+    <!-- Jump Buttons -->
+    <div class="sticky top-20 z-40 bg-white dark:bg-zinc-900 shadow-2xl rounded-3xl p-5 mb-12 border border-emerald-200 dark:border-emerald-800">
+      <p class="text-center text-emerald-600 text-sm font-medium mb-3">JUMP TO STORY</p>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <button onclick="scrollToStory('advait')" class="nav-btn px-7 py-3.5 bg-zinc-100 dark:bg-zinc-800 rounded-2xl font-medium flex items-center gap-2">
+          <i class="fas fa-user-graduate"></i> Advait
+        </button>
+        <button onclick="scrollToStory('tilak')" class="nav-btn px-7 py-3.5 bg-zinc-100 dark:bg-zinc-800 rounded-2xl font-medium flex items-center gap-2">
+          <i class="fas fa-user-graduate"></i> Tilak
+        </button>
+        <button onclick="scrollToStory('sreelakshmi')" class="nav-btn px-7 py-3.5 bg-zinc-100 dark:bg-zinc-800 rounded-2xl font-medium flex items-center gap-2">
+          <i class="fas fa-user-graduate"></i> Sreelakshmi
+        </button>
+        <button onclick="scrollToStory('vinusha')" class="nav-btn px

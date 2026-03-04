@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Savings - Smart ₹Money</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
+<nav class="bg-white dark:bg-zinc-900 shadow-lg fixed w-full z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <!-- Left: ₹ Logo (exactly like your PDF) -->
+    <div class="flex items-center">
+      <span class="text-5xl font-light text-zinc-800 dark:text-white">₹</span>
+    </div>
+
+    <!-- Center: Menu Links (exactly like your PDF) -->
+    <div class="flex gap-8 text-lg font-medium text-zinc-500 dark:text-zinc-400">
+      <a href="index.html" class="hover:text-emerald-600 transition-colors">Home</a>
+      <a href="savings.html" class="hover:text-emerald-600 transition-colors">Savings</a>
+      <a href="spending.html" class="hover:text-emerald-600 transition-colors">Spending</a>
+      <a href="planner.html" class="hover:text-emerald-600 transition-colors">Planner</a>
+      <a href="quiz.html" class="hover:text-emerald-600 transition-colors">Quiz</a>
+      <a href="inspire.html" class="hover:text-emerald-600 transition-colors">Inspire</a>
+    </div>
+
+    <!-- Right: Theme toggle + Student name (exactly like your PDF) -->
+    <div class="flex items-center gap-6">
+      <button onclick="toggleDark()" id="theme-btn" class="text-3xl text-zinc-500 hover:text-emerald-600 transition-colors">
+        <i class="fas fa-moon"></i>
+      </button>
+      <div id="user-info" class="font-medium text-emerald-600 text-lg">student</div>
+    </div>
+  </div>
+</nav>
+
+  <div class="max-w-6xl mx-auto px-6 pt-28 pb-20">
+    <h1 class="text-5xl font-bold text-center mb-4">Smart Saving Strategies</h1>
+    <p class="text-center text-xl text-emerald-600">For Indian students like you!</p>
+
+    <div class="grid md:grid-cols-2 gap-8 mt-12">
+      <!-- 10 Tips Cards (real tips from research) -->
+      <div class="space-y-6">
+        <div class="bg-white dark:bg-zinc-800 p-6 rounded-3xl card-hover">
+          <h3 class="font-bold text-xl">1. 20% Rule</h3>
+          <p class="text-zinc-600 dark:text-zinc-400">Every time you get pocket money, put 20% straight into piggy bank or bank account.</p>
+        </div>
+        <!-- Add 9 more similar cards with tips from my research (Pay yourself first, 3-jar system, etc.) -->
+      </div>
+
+      <!-- Savings Calculator -->
+      <div class="bg-white dark:bg-zinc-800 rounded-3xl p-8">
+        <h3 class="text-3xl font-bold mb-8">Savings Goal Calculator</h3>
+        <input id="goalAmt" placeholder="Goal Amount ₹" class="w-full p-4 rounded-2xl mb-4 bg-zinc-100 dark:bg-zinc-700">
+        <input id="months" type="number" placeholder="In how many months?" class="w-full p-4 rounded-2xl mb-6 bg-zinc-100 dark:bg-zinc-700">
+        <button onclick="calcSavings()" class="w-full bg-emerald-600 text-white py-5 rounded-3xl text-xl font-bold">Calculate Monthly Savings</button>
+        <div id="result" class="mt-8 text-3xl font-bold text-center"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Same tailwind + dark toggle script as index
+    function calcSavings() {
+      const amt = parseFloat(document.getElementById('goalAmt').value)
+      const months = parseFloat(document.getElementById('months').value)
+      if(amt && months) {
+        const monthly = (amt / months).toFixed(0)
+        document.getElementById('result').innerHTML = `Save just <span class="text-emerald-500">₹${monthly}</span> every month!`
+      }
+    }
+  </script>
+</body>
+</html>

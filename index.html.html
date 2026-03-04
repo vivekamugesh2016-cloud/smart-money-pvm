@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart ₹Money | Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    .hero-bg { background: linear-gradient(135deg, #10b981, #3b82f6); }
+    .card-hover { transition: all 0.3s; }
+    .card-hover:hover { transform: translateY(-10px) scale(1.05); }
+  </style>
+</head>
+<body class="bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen">
+  <!-- NAV -->
+  <nav class="bg-white dark:bg-zinc-900 shadow-lg fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <span class="text-4xl">₹</span>
+        <h1 class="text-3xl font-bold tracking-tighter bg-gradient-to-r from-emerald-500 to-blue-600 bg-clip-text text-transparent">SMART MONEY</h1>
+      </div>
+      <div class="flex gap-8 text-lg font-medium">
+        <a href="index.html" class="hover:text-emerald-500">Home</a>
+        <a href="savings.html" class="hover:text-emerald-500">Savings</a>
+        <a href="spending.html" class="hover:text-emerald-500">Spending</a>
+        <a href="planner.html" class="hover:text-emerald-500">Planner</a>
+        <a href="quiz.html" class="hover:text-emerald-500">Quiz</a>
+        <a href="inspire 2.html" class="hover:text-emerald-500">Inspire</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <button onclick="toggleDark()" id="theme-btn" class="text-2xl"><i class="fas fa-moon"></i></button>
+        <div id="user-info" class="text-sm font-medium"></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="pt-24 pb-12 hero-bg text-white">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h1 class="text-6xl font-bold mb-4">Welcome to Smart ₹Money</h1>
+      <p class="text-2xl mb-8">Your personal guide to becoming a money-smart student!</p>
+      <div class="flex justify-center gap-6">
+        <button onclick="document.getElementById('setup').scrollIntoView({behavior:'smooth'})" class="bg-white text-emerald-600 px-10 py-4 rounded-2xl text-xl font-bold hover:scale-105">Start My Journey →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 py-12">
+    <!-- PROFILE SETUP -->
+    <div id="setup" class="bg-white dark:bg-zinc-800 rounded-3xl p-8 shadow-xl mb-12">
+      <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><i class="fas fa-user"></i> Your Smart Money Profile</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <input id="name" placeholder="Your Name (e.g. Hareesh)" class="bg-zinc-100 dark:bg-zinc-700 p-4 rounded-2xl text-lg">
+        <input id="pocket" type="number" placeholder="Monthly Pocket Money ₹" class="bg-zinc-100 dark:bg-zinc-700 p-4 rounded-2xl text-lg">
+        <button onclick="saveProfile()" class="bg-emerald-600 text-white rounded-2xl text-xl font-bold hover:bg-emerald-700">Save Profile</button>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <h2 class="text-4xl font-bold mb-8">Your Dashboard <span id="dash-name" class="text-emerald-500"></span></h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="bg-white dark:bg-zinc-800 rounded-3xl p-8 card-hover">
+        <p class="text-emerald-500 text-sm">CURRENT BALANCE</p>
+        <p id="balance" class="text-5xl font-bold mt-2">₹0</p>
+      </div>
+      <div class="bg-white dark:bg-zinc-800 rounded-3xl p-8 card-hover">
+        <p class="text-amber-500 text-sm">SAVINGS GOAL PROGRESS</p>
+        <p id="goal-progress" class="text-5xl font-bold mt-2">0%</p>
+      </div>
+      <div class="bg-white dark:bg-zinc-800 rounded-3xl p-8 card-hover col-span-2">
+        <p class="text-sm mb-4">QUICK TIP OF THE DAY</p>
+        <p id="daily-tip" class="italic text-lg">"Save ₹20 every day = ₹600 in a month!"</p>
+      </div>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <a href="savings.html" class="block bg-gradient-to-br from-emerald-400 to-teal-500 text-white rounded-3xl p-8 card-hover">
+        <i class="fas fa-piggy-bank text-5xl mb-4"></i>
+        <h3 class="text-2xl font-bold">Savings Tips</h3>
+      </a>
+      <a href="planner.html" class="block bg-gradient-to-br from-amber-400 to-orange-500 text-white rounded-3xl p-8 card-hover">
+        <i class="fas fa-calculator text-5xl mb-4"></i>
+        <h3 class="text-2xl font-bold">Budget Planner</h3>
+      </a>
+      <a href="quiz.html" class="block bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-3xl p-8 card-hover">
+        <i class="fas fa-question-circle text-5xl mb-4"></i>
+        <h3 class="text-2xl font-bold">Test Your Knowledge</h3>
+      </a>
+    </div>
+  </div>
+
+  <footer class="bg-zinc-900 text-white py-12 text-center">
+    <p>Made with ❤️ by Hareesh (Grade 8, CBSE) for Coding Expo 2026</p>
+    <p class="text-sm mt-2">Smart ₹Money – Become Rich Before 18!</p>
+  </footer>
+
+  <script>
+    // Tailwind config
+    tailwind.config = { darkMode: 'class' }
+
+    function toggleDark() {
+      document.documentElement.classList.toggle('dark')
+      localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+      document.getElementById('theme-btn').innerHTML = document.documentElement.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>'
+    }
+
+    function saveProfile() {
+      const name = document.getElementById('name').value || "Student"
+      const pocket = parseFloat(document.getElementById('pocket').value) || 500
+      localStorage.setItem('sm_name', name)
+      localStorage.setItem('sm_pocket', pocket)
+      updateDashboard()
+    }
+
+    function updateDashboard() {
+      const name = localStorage.getItem('sm_name') || "Student"
+      const pocket = parseFloat(localStorage.getItem('sm_pocket')) || 500
+      document.getElementById('dash-name').textContent = name + "!"
+      document.getElementById('user-info').innerHTML = `<span class="px-4 py-2 bg-emerald-100 dark:bg-emerald-900 rounded-3xl">${name}</span>`
+      document.getElementById('balance').textContent = '₹' + pocket
+    }
+
+    // Random daily tip
+    const tips = [
+      "Save 20% of every pocket money – it becomes ₹7,200 in 3 years!",
+      "Needs vs Wants: Food = Need, New game = Want",
+      "₹10 saved daily = New cycle in 8 months!",
+      "Never buy on impulse – wait 24 hours!"
+    ]
+    document.getElementById('daily-tip').textContent = tips[Math.floor(Math.random()*tips.length)]
+
+    // Load on start
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage))) document.documentElement.classList.add('dark')
+    updateDashboard()
+  </script>
+</body>
+</html>

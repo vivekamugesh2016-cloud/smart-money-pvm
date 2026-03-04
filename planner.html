@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget Planner - Smart ₹Money</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body class="bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen">
+
+<nav class="bg-white dark:bg-zinc-900 shadow-lg fixed w-full z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <!-- Left: ₹ Logo (exactly like your PDF) -->
+    <div class="flex items-center">
+      <span class="text-5xl font-light text-zinc-800 dark:text-white">₹</span>
+    </div>
+
+    <!-- Center: Menu Links (exactly like your PDF) -->
+    <div class="flex gap-8 text-lg font-medium text-zinc-500 dark:text-zinc-400">
+      <a href="index.html" class="hover:text-emerald-600 transition-colors">Home</a>
+      <a href="savings.html" class="hover:text-emerald-600 transition-colors">Savings</a>
+      <a href="spending.html" class="hover:text-emerald-600 transition-colors">Spending</a>
+      <a href="planner.html" class="hover:text-emerald-600 transition-colors">Planner</a>
+      <a href="quiz.html" class="hover:text-emerald-600 transition-colors">Quiz</a>
+      <a href="inspire.html" class="hover:text-emerald-600 transition-colors">Inspire</a>
+    </div>
+
+    <!-- Right: Theme toggle + Student name (exactly like your PDF) -->
+    <div class="flex items-center gap-6">
+      <button onclick="toggleDark()" id="theme-btn" class="text-3xl text-zinc-500 hover:text-emerald-600 transition-colors">
+        <i class="fas fa-moon"></i>
+      </button>
+      <div id="user-info" class="font-medium text-emerald-600 text-lg">student</div>
+    </div>
+  </div>
+</nav>
+
+  <div class="pt-28 max-w-6xl mx-auto px-6 py-12">
+    <h1 class="text-5xl font-bold text-center mb-6">My Budget Planner</h1>
+    <p class="text-center text-xl mb-12 text-emerald-600 dark:text-emerald-400">Track pocket money & expenses!</p>
+
+    <div class="grid md:grid-cols-2 gap-12">
+      <!-- Expense Form -->
+      <div class="bg-white dark:bg-zinc-800 rounded-3xl p-8 shadow-xl">
+        <h2 class="text-3xl font-bold mb-6">Add Expense</h2>
+        <input id="expDesc" placeholder="What? (e.g. Ice cream)" class="w-full p-4 rounded-2xl mb-4 bg-zinc-100 dark:bg-zinc-700">
+        <input id="expAmt" type="number" placeholder="Amount ₹" class="w-full p-4 rounded-2xl mb-6 bg-zinc-100 dark:bg-zinc-700">
+        <button onclick="addExpense()" class="w-full bg-emerald-600 text-white py-5 rounded-3xl text-xl font-bold hover:bg-emerald-700">Add</button>
+
+        <div id="expensesList" class="mt-8 space-y-4"></div>
+      </div>
+
+      <!-- Chart + Goals -->
+      <div>
+        <div class="bg-white dark:bg-zinc-800 rounded-3xl p-8 shadow-xl mb-8">
+          <h2 class="text-3xl font-bold mb-6">Budget Breakdown</h2>
+          <canvas id="myChart" height="300"></canvas>
+        </div>
+
+        <div class="bg-white dark:bg-zinc-800 rounded-3xl p-8 shadow-xl">
+          <h2 class="text-3xl font-bold mb-6">Savings Goal</h2>
+          <input id="goalName" placeholder="Goal (e.g. New Cycle)" class="w-full p-4 rounded-2xl mb-4 bg-zinc-100 dark:bg-zinc-700">
+          <input id="goalAmt" type="number" placeholder="Target ₹" class="w-full p-4 rounded-2xl mb-4 bg-zinc-100 dark:bg-zinc-700">
+          <button onclick="addGoal()" class="w-full bg-blue-600 text-white py-4 rounded-3xl">Set Goal</button>
+          <div id="goalsList" class="mt-6 space-y-6"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // dark toggle + user info same as above
+
+    let expenses = JSON.parse(localStorage.getItem('sm_expenses')) || []
+    let goals = JSON.parse(localStorage.getItem('sm_goals')) || []
+    let chart
+
+    function saveData() {
+      localStorage.setItem('sm_expenses', JSON.stringify(expenses))
+      localStorage.setItem('sm_goals', JSON.stringify(goals))
+    }
+
+    function addExpense() {
+      const desc = document.getElementById('expDesc').value
+      const amt = parseFloat(document.getElementById('expAmt').value)
+      if (desc && amt > 0) {
+        expenses.push({desc, amt})
+        saveData()
+        renderExpenses()
+        updateChart()
+        document.getElementById('expDesc').value = ''
+        document.getElementById('expAmt').value = ''
+      }
+    }
+
+    function renderExpenses() {
+      const list = document.getElementById('expensesList')
+      list.innerHTML = expenses.map((e,i) => `
+        <div class="flex justify-between p-4 bg-zinc-100 dark:bg-zinc-700 rounded-2xl">
+          <span>${e.desc}</span>
+          <span class="text-red-500">-₹${e.amt}</span>
+        </div>
+      `).join('')
+    }
+
+    function updateChart() {
+      const ctx = document.getElementById('myChart').getContext('2d')
+      if (chart) chart.destroy()
+      const labels = expenses.map(e => e.desc)
+      const data = expenses.map(e => e.amt)
+      chart = new Chart(ctx, {
+        type: 'pie',
+        data: { labels, datasets: [{ data, backgroundColor: ['#10b981','#3b82f6','#f59e0b','#ef4444','#8b5cf6'] }] },
+        options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+      })
+    }
+
+    function addGoal() {
+      const name = document.getElementById('goalName').value
+      const target = parseFloat(document.getElementById('goalAmt').value)
+      if (name && target > 0) {
+        goals.push({name, target, saved: 0})
+        saveData()
+        renderGoals()
+        document.getElementById('goalName').value = ''
+        document.getElementById('goalAmt').value = ''
+      }
+    }
+
+    function renderGoals() {
+      const list = document.getElementById('goalsList')
+      list.innerHTML = goals.map((g,i) => {
+        const perc = ((g.saved / g.target) * 100).toFixed(0)
+        return `
+          <div>
+            <div class="flex justify-between mb-2">
+              <span>${g.name}</span>
+              <span>₹${g.saved} / ₹${g.target}</span>
+            </div>
+            <div class="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-4">
+              <div class="bg-blue-600 h-4 rounded-full" style="width:${perc}%"></div>
+            </div>
+          </div>
+        `
+      }).join('')
+    }
+
+    // Load
+    renderExpenses()
+    updateChart()
+    renderGoals()
+  </script>
+</body>
+</html>

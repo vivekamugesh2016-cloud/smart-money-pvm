@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Inspire - Smart Money PVM</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" href="logo.png" type="image/png">
+  <style>
+    .story-card { 
+      transition: all 0.4s; 
+    }
+    .story-card:hover { 
+      transform: translateY(-8px); 
+      box-shadow: 0 15px 30px -8px rgba(0,0,0,0.15); 
+    }
+    .nav-btn { 
+      transition: all 0.3s; 
+    }
+    .nav-btn:hover { 
+      transform: scale(1.05); 
+      background-color: #10b981; 
+      color: white; 
+    }
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen pb-20">
+
+  <!-- Top App Nav -->
+  <nav class="bg-white dark:bg-zinc-900 shadow-lg fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+      <img src="logo.png" alt="Smart Money" class="h-10 w-auto">
+      <div class="hidden md:flex gap-8 text-lg font-medium text-zinc-500 dark:text-zinc-400">
+        <a href="index.html">Home</a>
+        <a href="savings.html">Savings</a>
+        <a href="spending.html">Spending</a>
+        <a href="planner.html">Planner</a>
+        <a href="inspire.html" class="text-emerald-600 font-bold">Inspire</a>
+      </div>
+      <div class="flex items-center gap-5">
+        <button onclick="toggleDark()" id="theme-btn" class="text-3xl text-zinc-500"><i class="fas fa-moon"></i></button>
+        <div id="user-info" class="font-medium text-emerald-600 text-lg">student</div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="pt-28 max-w-6xl mx-auto px-6 py-12">
+    <!-- Jump Buttons -->
+    <div class="sticky top-20 z-40 bg-white dark:bg-zinc-900 shadow-2xl rounded-3xl p-5 mb-12 border border-emerald-200 dark:border-emerald-800">
+      <p class="text-center text-emerald-600 text-sm font-medium mb-3">JUMP TO STORY</p>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <button onclick="scrollToStory('advait')" class="nav-btn px-7 py-3.5 bg-zinc-100 dark:bg-zinc-800 rounded-2xl font-medium flex items-center gap-2">
+          <i class="fas fa-user-graduate"></i> Advait
+        </button>
+        <button onclick="scrollToStory('tilak')" class="nav-btn px-7 py-3.5 bg-zinc-100 dark:bg-zinc-800 rounded-2xl font-medium flex items-center gap-2">
+          <i class="fas fa-user-graduate"></i> Tilak
+        </button>
+        <button onclick="scrollToStory('sreelakshmi')" class="nav-btn px-7 py-3.5 bg-zinc-100 dark:bg-zinc-800 rounded-2xl font-medium flex items-center gap-2">
+          <i class="fas fa-user-graduate"></i> Sreelakshmi
+        </button>
+        <button onclick="scrollToStory('vinusha')" class="nav-btn px-7 py-3.5 bg-zinc-100 dark:bg-zinc-800 rounded-2xl font-medium flex items-center gap-2">
+          <i class="fas fa-user-graduate"></i> Vinusha
+        </button>
+        <button onclick="scrollToStory('final')" class="nav-btn px-7 py-3.5 bg-zinc-100 dark:bg-zinc-800 rounded-2xl font-medium flex items-center gap-2">
+          <i class="fas fa-quote-left"></i> Message
+        </button>
+      </div>
+    </div>
+
+    <h1 class="text-6xl font-bold text-center mb-3">Inspiring Stories</h1>
+    <p class="text-center text-2xl text-emerald-600 mb-16">Indian students & teens who became money-smart early!</p>
+
+    <!-- Story 1: Advait Thakur -->
+    <div id="advait" class="story-card bg-white dark:bg-zinc-800 rounded-3xl p-10 shadow-xl mb-12">
+      <h2 class="text-4xl font-bold mb-2">Advait Thakur</h2>
+      <p class="text-sm text-zinc-500 mb-4">Age 12, Founder of Apex Infosys</p>
+      <p class="text-lg leading-relaxed mb-6">
+        Started coding at 6, founded Apex Infosys India at age 12. Built apps & websites – shows learning skills early can lead to big success!
+      </p>
+      <p class="italic text-emerald-600 text-xl">
+        "Start small, learn daily → become entrepreneur young."
+      </p>
+    </div>
+
+    <!-- Story 2: Tilak Mehta -->
+    <div id="tilak" class="story-card bg-white dark:bg-zinc-800 rounded-3xl p-10 shadow-xl mb-12">
+      <h2 class="text-4xl font-bold mb-2">Tilak Mehta</h2>
+      <p class="text-sm text-zinc-500 mb-4">Age 13, Founder of Papers N Parcels</p>
+      <p class="text-lg leading-relaxed mb-6">
+        At 13, started Papers N Parcels – low-cost delivery service in Mumbai using dabbawalas. Now a successful teen business!
+      </p>
+      <p class="italic text-emerald-600 text-xl">
+        "Spot problems around you (like parcel delivery) and solve them smartly."
+      </p>
+    </div>
+
+    <!-- Story 3: Sreelakshmi Suresh -->
+    <div id="sreelakshmi" class="story-card bg-white dark:bg-zinc-800 rounded-3xl p-10 shadow-xl mb-12">
+      <h2 class="text-4xl font-bold mb-2">Sreelakshmi Suresh</h2>
+      <p class="text-sm text-zinc-500 mb-4">Age 11, CEO of eDesign</p>
+      <p class="text-lg leading-relaxed mb-6">
+        Began web designing at 9, became CEO of eDesign at 11. Designed websites for big clients – youngest in world!
+      </p>
+      <p class="italic text-emerald-600 text-xl">
+        "Practice skills like coding/design → turn hobby into business."
+      </p>
+    </div>
+
+    <!-- Story 4: Vinusha MK -->
+    <div id="vinusha" class="story-card bg-white dark:bg-zinc-800 rounded-3xl p-10 shadow-xl mb-12">
+      <h2 class="text-4xl font-bold mb-2">Vinusha MK</h2>
+      <p class="text-sm text-zinc-500 mb-4">Age 13, Founder of Four Seasons Pastry</p>
+      <p class="text-lg leading-relaxed mb-6">
+        Started Four Seasons Pastry at 13 – bakes & sells cupcakes, now offers baking kits. Built brand using social media!
+      </p>
+      <p class="italic text-emerald-600 text-xl">
+        "Use pocket money ideas + social media = real business."
+      </p>
+    </div>
+
+    <!-- Final Message -->
+    <div id="final" class="story-card bg-gradient-to-br from-emerald-600 to-teal-700 text-white rounded-3xl p-12 text-center shadow-2xl">
+      <i class="fas fa-quote-left text-6xl opacity-30 mb-6"></i>
+      <p class="text-3xl leading-relaxed mb-6">
+        "Age is just a number – smart habits & hard work make you rich in future!"
+      </p>
+      <p class="text-xl opacity-90">
+        – Inspired for you, Hareesh from Tirunelveli!
+      </p>
+    </div>
+  </div>
+
+  <!-- Bottom Mobile Navigation -->
+  <div class="fixed bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 border-t z-50 md:hidden">
+    <div class="flex justify-around py-3 text-xs">
+      <a href="index.html" class="flex flex-col items-center text-zinc-500"><i class="fas fa-home text-2xl"></i><span>Home</span></a>
+      <a href="savings.html" class="flex flex-col items-center text-zinc-500"><i class="fas fa-piggy-bank text-2xl"></i><span>Savings</span></a>
+      <a href="spending.html" class="flex flex-col items-center text-zinc-500"><i class="fas fa-credit-card text-2xl"></i><span>Spend</span></a>
+      <a href="planner.html" class="flex flex-col items-center text-zinc-500"><i class="fas fa-chart-pie text-2xl"></i><span>Plan</span></a>
+      <a href="inspire.html" class="flex flex-col items-center text-emerald-600"><i class="fas fa-star text-2xl"></i><span>Inspire</span></a>
+    </div>
+  </div>
+
+  <!-- Team Credit Footer -->
+  <footer class="text-center py-8 text-xs text-zinc-400 border-t bg-white dark:bg-zinc-900">
+    Made with ❤️ by Class 8 - I • Hareesh Krishna, Vishwa Sai Ram, Sabari Chandru, Rayyan Younus, Chittesh
+  </footer>
+
+  <script>
+    tailwind.config = { darkMode: 'class' }
+
+    function toggleDark() {
+      document.documentElement.classList.toggle('dark')
+      localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+      document.getElementById('theme-btn').innerHTML = document.documentElement.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>'
+    }
+
+    if (localStorage.theme === 'dark') document.documentElement.classList.add('dark')
+
+    const name = localStorage.getItem('sm_name') || 'student'
+    document.getElementById('user-info').textContent = name
+
+    function scrollToStory(id) {
+      const element = document.getElementById(id)
+      if (element) {
+        const navHeight = 100
+        const elementPosition = element.getBoundingClientRect().top
+        const offsetPosition = elementPosition + window.scrollY - navHeight
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
+      }
+    }
+  </script>
+</body>
+</html>
